@@ -14,8 +14,8 @@ def database():
     lastname = ent_ln.get()
     email = ent_em.get()
     password = ent_pass.get()
-    state  =var.get()
-    sex = rb1.get()
+    state = var.get()
+    genr = rb1.get()
     d = var1.get()
     m = var2.get()
     y = var3.get()
@@ -23,7 +23,7 @@ def database():
     conn = sqlite3.connect ('database.db')
     cur = conn.cursor()
     cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, genre TEXT, day TEXT, month TEXT, year TEXT)')
-    cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, genre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, sex, d, m, y,))
+    cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, genre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, genr, d, m, y,))
     conn.commit()
     conn.close()
 
@@ -43,18 +43,19 @@ def second_window():
         password = ent_lg_pass.get()
 
         conn = sqlite3.connect ('database.db')
-        c = conn.cursor()
-        c.execute ("SELECT * FROM user")
-        read = c.fetchall()
+        cur = conn.cursor()
+        cur.execute ("SELECT * FROM user")
+        read = cur.fetchall()
 
         for i in read:
             if e_mail == i[2] and password == i[3]:
-                tkinter.messagebox.showinfo (" Success", "Login Successfull")
-                print(i)
+                tkinter.messagebox.showinfo ("Success", "Login Successfull, Check 'result.txt' File")
+                with open('rezult.txt','w') as file:
+                    file.write(str(i))
                 break
         else:
-            print('Wrong UserName Or Password')
-            tkinter.messagebox.showinfo ("Failed", "Wrong Email Or Password")
+            tkinter.messagebox.showwarning ("Failed", "Wrong Email Or Password")
+
 
 
     label_w2 = Label (window, text= 'Enter your Email and Password', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
@@ -65,9 +66,9 @@ def second_window():
     label_w4.place (x = 30, y = 250)
     
     entry_w3 = Entry (window ,textvar = ent_lg_em)
-    entry_w3.place (x = 100, y = 200)
+    entry_w3.place (x = 110, y = 200)
     entry_w4 = Entry (window, show = "*", textvar = ent_lg_pass)
-    entry_w4.place (x = 100, y = 250)
+    entry_w4.place (x = 110, y = 250)
 
     btn_login = Button (window, text = 'Login', bg = 'red', fg = 'white', command = login)
     btn_login.place (x = 280, y = 300)
@@ -95,7 +96,7 @@ submenu2.add_command (label = 'About', command = about)
 ent_fn = StringVar()
 ent_ln = StringVar()
 ent_em = StringVar()
-ent_pass  =StringVar()
+ent_pass = StringVar()
 var = StringVar()
 rb1 = StringVar()
 var1 = StringVar()
@@ -168,9 +169,9 @@ rbtn2.place (x = 280, y = 400)
 login_button = Button (root, text = 'Login', bg = 'red', fg = 'white', command = second_window)
 login_button.place (x = 400, y = 520)
 register_button = Button (root, text = 'Register', bg = 'red', fg = 'white', command = database)
-register_button.place (x = 200, y = 460)
+register_button.place (x = 210, y = 460)
 quit_button = Button (root, text = 'Quit', bg = 'red', fg = 'white', command = root.destroy)
-quit_button.place (x = 300, y = 460)
+quit_button.place (x = 310, y = 460)
 
 if __name__ == '__main__':
 

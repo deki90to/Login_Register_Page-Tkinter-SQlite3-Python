@@ -3,11 +3,17 @@ import tkinter.messagebox
 import sqlite3
 from PIL import Image,ImageTk
 
-def exitt():
-    exit()
+
+def exitApp():
+    opt = tkinter.messagebox.askquestion('Exit application','Are you sure?')
+    if opt == 'yes':
+        root.destroy()
+    else:
+        tkinter.messagebox.showinfo('Canceled','Quit canceled')
 
 def about():
     tkinter.messagebox.showinfo ("About page", "This is a registration page")
+
 
 def database():
     firstname = ent_fn.get()
@@ -27,13 +33,59 @@ def database():
     conn.commit()
     conn.close()
 
+
+def third_window():
+    window2 = Toplevel()
+    window2.geometry('400x80')
+    window2.title ('Password Recovery')
+    photo = PhotoImage (file = 'wallpaper.png')
+    label = Label (window2, image = photo)
+    label.pack ()
+
+
+    ent_rec = StringVar()
+
+    def recover():
+        rec = ent_rec.get()
+
+        conn = sqlite3.connect ('database.db')
+        cur = conn.cursor()
+        cur.execute ("SELECT * FROM user")
+        read = cur.fetchall()
+
+
+        for i in read:
+            if rec == i[2]:
+                tkinter.messagebox.showinfo ("Done","Password saved in 'your_password.txt' file")
+                with open('your_password.txt','w') as file:
+                    file.write(i[3])
+                    window2.destroy()
+
+            else:
+                mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
+                if mail_n_f == 'no':
+                    window2.destroy()
+                else:
+                    tkinter.messagebox.showinfo('Try again','Enter email again')
+
+
+    label_rc = Label (window2, text = 'Enter Your Email', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
+    label_rc.place (x = 10, y = 28)
+    entry_rec = Entry (window2, textvar = ent_rec)
+    entry_rec.place (x = 150, y = 30)
+    button_rec = Button (window2, text = 'Resend', bg = 'red', fg = 'white', relief = 'raised', font = ('arial', 9), command = recover)
+    button_rec.place (x = 290, y = 30)
+
+    window2.mainloop()
+
+
 def second_window():
     window = Toplevel()
     window.geometry ('400x400')
     window.title ('Login Page')
     photo = PhotoImage (file = 'wallpaper.png')
-    label = Label(window, image = photo)
-    label.pack()
+    label = Label (window, image = photo)
+    label.pack ()
 
     ent_lg_em = StringVar()
     ent_lg_pass = StringVar()
@@ -47,35 +99,42 @@ def second_window():
         cur.execute ("SELECT * FROM user")
         read = cur.fetchall()
 
+
         for i in read:
             if e_mail == i[2] and password == i[3]:
-                tkinter.messagebox.showinfo ("Success", "Login Successfull, Check 'result.txt' File")
-                with open('rezult.txt','w') as file:
+                tkinter.messagebox.showinfo ("Success", "Login successfull, check 'result.txt' file")
+                with open('result.txt','w') as file:
                     file.write(str(i))
                 break
         else:
-            tkinter.messagebox.showwarning ("Failed", "Wrong Email Or Password")
+            tkinter.messagebox.showwarning ("Failed", "Wrong email or password")
+            window.destroy()
 
 
 
     label_w2 = Label (window, text= 'Enter your Email and Password', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
     label_w2.place (x = 20, y = 100)
-    label_w3=Label (window, text = 'Email', bg = '#004038', fg = 'white', relief = 'raised')
+    label_w3 = Label (window, text = 'Email', bg = '#004038', fg = 'white', relief = 'raised')
     label_w3.place (x = 30, y = 200)
     label_w4 = Label (window, text = 'Password', bg = '#004038', fg = 'white', relief = 'raised')
     label_w4.place (x = 30, y = 250)
-    
+    label_rec = Label (window, text = "Forget password?", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',12))
+    label_rec.place (x = 190, y = 370)
+
     entry_w3 = Entry (window ,textvar = ent_lg_em)
     entry_w3.place (x = 110, y = 200)
     entry_w4 = Entry (window, show = "*", textvar = ent_lg_pass)
     entry_w4.place (x = 110, y = 250)
 
     btn_login = Button (window, text = 'Login', bg = 'red', fg = 'white', command = login)
-    btn_login.place (x = 280, y = 300)
+    btn_login.place (x = 110, y = 300)
     btn_cancel = Button (window, text = 'Cancel', bg = 'red', fg = 'white', command = window.destroy)
-    btn_cancel.place (x = 330, y = 300)
+    btn_cancel.place (x = 190, y = 300)
+    btn_rec = Button (window, text = 'Click here', bg = 'red', fg = 'white', command = third_window)
+    btn_rec.place (x = 335 , y = 370)
 
     window.mainloop()
+
 
 root = Tk()
 root.geometry ('600x600')
@@ -88,7 +147,7 @@ menu = Menu(root)
 root.config (menu = menu)
 submenu1 = Menu (menu)
 menu.add_cascade (label = 'File', menu = submenu1)
-submenu1.add_command (label = 'Exit', command = exitt)
+submenu1.add_command (label = 'Exit', command = root.destroy)
 submenu2 = Menu (menu)
 menu.add_cascade (label = 'Options', menu = submenu2)
 submenu2.add_command (label = 'About', command = about)
@@ -165,12 +224,11 @@ rbtn2.place (x = 280, y = 400)
 
 
 
-
 login_button = Button (root, text = 'Login', bg = 'red', fg = 'white', command = second_window)
 login_button.place (x = 400, y = 520)
 register_button = Button (root, text = 'Register', bg = 'red', fg = 'white', command = database)
 register_button.place (x = 210, y = 460)
-quit_button = Button (root, text = 'Quit', bg = 'red', fg = 'white', command = root.destroy)
+quit_button = Button (root, text = 'Quit', bg = 'red', fg = 'white', command = exitApp)
 quit_button.place (x = 310, y = 460)
 
 if __name__ == '__main__':

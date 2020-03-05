@@ -1,1 +1,0 @@
-('some', 'one', 'someone@gmail.com', 'someone', 'Serbia', 'Male', '1', 'January', '1980')

@@ -66,6 +66,7 @@ def third_window():
                 with open('your_password.txt','w') as file:
                     file.write(i[3])
                     window2.destroy()
+                    break
 
             else:
                 mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
@@ -109,7 +110,8 @@ def second_window():
                 tkinter.messagebox.showinfo("Success", "Login successfull, check 'result.txt' file")
                 with open('result.txt','w') as file:
                     file.write(str(i))
-                break
+                    window.destroy()
+                    break
         else:
             tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 

@@ -3,6 +3,8 @@ import tkinter.messagebox
 import sqlite3
 from PIL import Image,ImageTk
 import time
+import calendar
+import datetime
 
 
 def cidClock():
@@ -166,7 +168,7 @@ var1 = StringVar()
 var2 = StringVar()
 var3 = StringVar()
 
-label = Label(root, text = 'Register', bg = '#004038', fg = 'white', relief = 'raised', font = ('Times', 30))
+label = Label(root, text = 'Register', bg = '#004038', fg = 'white', relief = 'ridge', font = ('Times', 30, 'bold'))
 label.place(x = 80, y = 100)
 label2 = Label(root, text = 'First Name', bg = '#004038', fg = 'white', relief = 'raised', font = (20))
 label2.place(x = 100, y = 200)
@@ -182,53 +184,57 @@ label7 = Label(root, text = 'Genre', bg = '#004038', fg = 'white', relief = 'rai
 label7.place(x = 100, y = 400)
 b_d = Label(root, text = 'Date Of Birth', bg = '#004038', fg = 'white', relief = 'raised', font = ('Times', 11))
 b_d.place(x = 100, y = 365)
-label8 = Label(root, text = 'If you are already registred, you can', bg = '#004038', fg = 'white', relief = 'sunken', font = ('Times', 12))
-label8.place(x = 210, y = 540)
+label8 = Label(root, text = 'If you are already registred, you can', bg = '#004038', fg = 'white', relief = 'sunken', font = ('Times', 12, 'bold'))
+label8.place(x = 180, y = 540)
+label_clock = Label(root, text = 'Time:', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10))
+label_clock.place(x = 360, y = 50)
+label_date = Label(root, text = 'Date:', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10))
+label_date.place(x = 360, y = 20)
 
 
-entry2 = Entry(root, textvar = ent_fn)
+entry2 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_fn)
 entry2.place(x = 210, y = 200)
-entry3 = Entry(root, textvar = ent_ln)
+entry3 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_ln)
 entry3.place(x = 210, y = 230)
-entry4 = Entry(root, textvar = ent_em)
+entry4 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_em)
 entry4.place(x = 210, y = 260)
-entry_pw = Entry(root, show = '*', textvar = ent_pass)
+entry_pw = Entry(root, font = ('arial', 10, 'bold'), show = '*', textvar = ent_pass)
 entry_pw.place(x = 210, y = 290)
 
 
 list_country = ['Serbia', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Romania', 'Montenegro', 'Albanija', 'Macedonia']
 droplist = OptionMenu(root, var, *list_country)
 var.set('Select Country')
-droplist.config(width = 12, bg = '#004038', fg = 'grey', relief = 'groove')
+droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
 droplist.place(x = 210, y = 325)
 
 day = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
 droplist = OptionMenu (root, var1, *day)
 var1.set('Select Day')
-droplist.config(width = 10, bg = '#004038', fg = 'grey')
+droplist.config(width = 10, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
 droplist.place(x = 210, y = 360)
 
 month = ['January', 'February', 'March', 'April', 'May', 'July', 'Jul', 'August', 'September', 'October', 'November', 'December']
 droplist = OptionMenu(root, var2, *month)
 var2.set('Select Month')
-droplist.config(width = 12, bg = '#004038', fg = 'grey')
-droplist.place(x = 290, y = 360)
+droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.place(x = 300, y = 360)
 
 year = ['1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997' ,'1998', '1999', '2000']
 droplist = OptionMenu(root, var3, *year)
 var3.set('Select Year')
-droplist.config(width = 12, bg = '#004038', fg = 'grey')
+droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
 droplist.place(x = 400, y = 360)
 
 
-rbtn1 = Radiobutton(root, text = 'Male', value = 'Male', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove')
+rbtn1 = Radiobutton(root, text = 'Male', value = 'Male', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove', font = ('arial', 10, 'bold'))
 rbtn1.place(x = 210, y = 400)
-rbtn2 = Radiobutton(root, text = 'Female', value = 'Female', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove')
+rbtn2 = Radiobutton(root, text = 'Female', value = 'Female', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove', font = ('arial', 10, 'bold'))
 rbtn2.place(x = 280, y = 400)
 
 
 
-login_button = Button(root, text = 'Click here', bg = 'red', fg = 'white', relief ='raised', font = ('arial', 12, 'bold'), command = second_window)
+login_button = Button(root, text = 'Login here', bg = 'red', fg = 'white', relief ='raised', font = ('arial', 12, 'bold'), command = second_window)
 login_button.place(x = 440, y = 540)
 register_button = Button(root, text = 'Register', bg = 'red', fg = 'white', font = ('arial', 12, 'bold'), command = database)
 register_button.place(x = 210, y = 460)
@@ -236,8 +242,11 @@ quit_button = Button(root, text = 'Quit', bg = 'red', fg = 'white', font = ('ari
 quit_button.place(x = 310, y = 460)
 
 
-clock = Label(root, bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 20))
-clock.place(x = 470, y = 10)
+clock = Label(root, bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10, 'bold'))
+clock.place(x = 420, y = 50)
+date = Label(root, text=f"{datetime.datetime.now():%a, %b %d %Y}", fg="white", bg="#004038", relief = 'raised', font=("arial", 10, 'bold'))
+date.place(x = 420, y = 20)
+
 
 
 

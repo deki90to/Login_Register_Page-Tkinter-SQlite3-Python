@@ -7,10 +7,10 @@ import calendar
 import datetime
 
 
-def cidClock():
+def Clock():
     current_time = time.strftime("%H:%M:%S")
     clock.config(text = current_time)
-    clock.after(100, cidClock)
+    clock.after(100, Clock)
 
 
 def exitApp():
@@ -139,11 +139,13 @@ def second_window():
     btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', command = third_window)
     btn_rec.place(x = 335 , y = 370)
 
+
+
     window.mainloop()
 
 
 root = Tk()
-root.geometry('600x600')
+root.geometry('600x610')
 root.title('Register Page')
 photo = PhotoImage(file = 'wallpaper.png')
 label = Label(root, image=photo)
@@ -168,8 +170,8 @@ var1 = StringVar()
 var2 = StringVar()
 var3 = StringVar()
 
-label = Label(root, text = 'Registration', bg = '#004038', fg = 'white', relief = 'ridge', font = ('Times', 30, 'bold'))
-label.place(x = 100, y = 80)
+label = Label(root, text = ' Registration ', bg = '#004038', fg = 'white', relief = 'ridge', font = ('Times', 30, 'bold'))
+label.place(x = 50, y = 80)
 label2 = Label(root, text = 'First name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label2.place(x = 100, y = 200)
 label3 = Label(root, text = 'Last name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
@@ -184,12 +186,12 @@ label7 = Label(root, text = 'Genre*', bg = '#004038', fg = 'white', relief = 'ra
 label7.place(x = 100, y = 405)
 b_d = Label(root, text = 'Date of birth*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 b_d.place(x = 100, y = 365)
-label8 = Label(root, text = 'If you are already registred', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 11, 'bold'))
-label8.place(x = 230, y = 545)
-# label_clock = Label(root, text = 'Time:', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10))
-# label_clock.place(x = 360, y = 50)
-# label_date = Label(root, text = 'Date:', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10))
-# label_date.place(x = 360, y = 20)
+label8 = Label(root, text = ' If you are already registred ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 11))
+label8.place(x = 210, y = 540)
+label_r_pointer = Label(root, text = '  >  ', bg = '#004038', fg = 'red', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_r_pointer.place(x = 230 , y = 575 )
+label_l_pointer = Label(root, text = '  <  ', bg = '#004038', fg = 'red', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_l_pointer.place(x = 340, y = 575)
 
 
 entry2 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_fn)
@@ -234,23 +236,23 @@ rbtn2.place(x = 280, y = 405)
 
 
 
-login_button = Button(root, text = 'Login here', bg = 'red', fg = 'white', relief ='raised', font = ('arial', 11, 'bold'), command = second_window)
-login_button.place(x = 440, y = 540)
+login_button = Button(root, text = 'Login here', bg = 'red', fg = 'white', relief ='raised', font = ('arial', 11), command = second_window)
+login_button.place(x = 260, y = 572)
 register_button = Button(root, text = 'Register', bg = 'red', fg = 'white', font = ('arial', 12, 'bold'), command = database)
 register_button.place(x = 210, y = 470)
 quit_button = Button(root, text = 'Quit', bg = 'red', fg = 'white', font = ('arial', 12, 'bold'), command = exitApp)
 quit_button.place(x = 300, y = 470)
 
 
-clock = Label(root, bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10, 'bold'))
-clock.place(x = 480, y = 20)
+clock = Label(root, bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 20, 'bold'))
+clock.place(x = 450, y = 20)
 date = Label(root, text=f"{datetime.datetime.now():%a, %b %d %Y}", fg="white", bg="#004038", relief = 'raised', font=("arial", 10, 'bold'))
-date.place(x = 450, y = 50)
+date.place(x = 450, y = 60)
 
 
 
 
 
 if __name__ == '__main__':
-    cidClock()
+    Clock()
     root.mainloop()

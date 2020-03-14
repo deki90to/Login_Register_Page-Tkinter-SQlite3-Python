@@ -70,10 +70,10 @@ def third_window():
                     window2.destroy()
                     break
 
-            else:
-                mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
-                if mail_n_f == 'no':
-                    window2.destroy()
+        else:
+            mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
+            if mail_n_f == 'no':
+                window2.destroy()
 
 
     label_rc = Label(window2, text = 'Enter your email', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10))
@@ -188,9 +188,9 @@ b_d = Label(root, text = 'Date of birth*', bg = '#004038', fg = 'white', relief 
 b_d.place(x = 100, y = 365)
 label8 = Label(root, text = ' If you are already registred ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 11))
 label8.place(x = 210, y = 540)
-label_r_pointer = Label(root, text = '  >  ', bg = '#004038', fg = 'red', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_r_pointer = Label(root, text = '  >  ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
 label_r_pointer.place(x = 230 , y = 575 )
-label_l_pointer = Label(root, text = '  <  ', bg = '#004038', fg = 'red', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_l_pointer = Label(root, text = '  <  ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
 label_l_pointer.place(x = 340, y = 575)
 
 

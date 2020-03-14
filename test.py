@@ -28,15 +28,15 @@ def database():
     email = ent_em.get()
     password = ent_pass.get()
     state = var.get()
-    genr = rb1.get()
+    gendr = rb1.get()
     d = var1.get()
     m = var2.get()
     y = var3.get()
 
     conn = sqlite3.connect('database.db')
     cur = conn.cursor()
-    cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, genre TEXT, day TEXT, month TEXT, year TEXT)')
-    cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, genre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, genr, d, m, y,))
+    cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+    cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
     conn.commit()
     conn.close()
 
@@ -76,12 +76,12 @@ def third_window():
                 window2.destroy()
 
 
-    label_rc = Label(window2, text = 'Enter your email', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 10))
+    label_rc = Label(window2, text = ' Enter your email ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
     label_rc.place(x = 10, y = 28)
     entry_rec = Entry(window2, textvar = ent_rec)
-    entry_rec.place(x = 130, y = 30)
-    button_rec = Button(window2, text = 'Resend', bg = 'red', fg = 'white', relief = 'raised', font = ('arial', 8), command = recover)
-    button_rec.place(x = 170, y = 60)
+    entry_rec.place(x = 140, y = 30)
+    button_rec = Button(window2, text = 'Resend', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10), command = recover)
+    button_rec.place(x = 145, y = 60)
 
     window2.mainloop()
 
@@ -119,22 +119,22 @@ def second_window():
 
 
 
-    label_w2 = Label(window, text= 'Enter your email and password', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14))
+    label_w2 = Label(window, text= ' Enter your email and password ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14))
     label_w2.place(x = 20, y = 100)
-    label_w3 = Label(window, text = 'Email', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
+    label_w3 = Label(window, text = ' Email ', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
     label_w3.place(x = 30, y = 200)
-    label_w4 = Label(window, text = 'Password', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
+    label_w4 = Label(window, text = ' Password ', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
     label_w4.place(x = 30, y = 250)
-    label_rec = Label(window, text = "Forget password?", bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial',10,'bold'))
+    label_rec = Label(window, text = "Forget password? ", bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial',10,'bold'))
     label_rec.place(x = 210, y = 373)
 
     entry_w3 = Entry(window ,textvar = ent_lg_em)
     entry_w3.place(x = 120, y = 202)
     entry_w4 = Entry(window, show = "*", textvar = ent_lg_pass)
     entry_w4.place(x = 120, y = 252)
-    btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', font = ('bold',10), command = login)
+    btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10), command = login)
     btn_login.place(x = 125, y = 300)
-    btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', font = ('bold',10), command = window.destroy)
+    btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 7, font = ('bold',10), command = window.destroy)
     btn_cancel.place(x = 190, y = 300)
     btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', command = third_window)
     btn_rec.place(x = 335 , y = 370)
@@ -145,7 +145,7 @@ def second_window():
 
 
 root = Tk()
-root.geometry('600x610')
+root.geometry('600x620')
 root.title('Register Page')
 photo = PhotoImage(file = 'wallpaper.png')
 label = Label(root, image=photo)
@@ -172,26 +172,26 @@ var3 = StringVar()
 
 label = Label(root, text = ' Registration ', bg = '#004038', fg = 'white', relief = 'ridge', font = ('Times', 30, 'bold'))
 label.place(x = 50, y = 80)
-label2 = Label(root, text = 'First name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label2 = Label(root, text = ' First name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label2.place(x = 100, y = 200)
-label3 = Label(root, text = 'Last name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label3 = Label(root, text = ' Last name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label3.place(x = 100, y = 230)
-label4 = Label(root, text = 'Email*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label4 = Label(root, text = ' Email*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label4.place(x = 100, y = 260)
-label_pw = Label(root, text = 'Password*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label_pw = Label(root, text = ' Password*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label_pw.place(x = 100, y = 290)
-label5 = Label(root, text = 'Country*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label5 = Label(root, text = ' Country*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label5.place(x = 100, y = 325)
-label7 = Label(root, text = 'Genre*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label7 = Label(root, text = ' Gendre*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label7.place(x = 100, y = 405)
-b_d = Label(root, text = 'Date of birth*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+b_d = Label(root, text = ' Date of birth*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 b_d.place(x = 100, y = 365)
-label8 = Label(root, text = ' If you are already registred ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 11))
+label8 = Label(root, text = ' If you are already registred ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
 label8.place(x = 210, y = 540)
-label_r_pointer = Label(root, text = '  >  ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
-label_r_pointer.place(x = 230 , y = 575 )
-label_l_pointer = Label(root, text = '  <  ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
-label_l_pointer.place(x = 340, y = 575)
+label_r_pointer = Label(root, text = ' > ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_r_pointer.place(x = 180 , y = 575 )
+label_l_pointer = Label(root, text = ' < ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_l_pointer.place(x = 410, y = 575)
 
 
 entry2 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_fn)
@@ -236,20 +236,18 @@ rbtn2.place(x = 280, y = 405)
 
 
 
-login_button = Button(root, text = 'Login here', bg = 'red', fg = 'white', relief ='raised', font = ('arial', 11), command = second_window)
-login_button.place(x = 260, y = 572)
-register_button = Button(root, text = 'Register', bg = 'red', fg = 'white', font = ('arial', 12, 'bold'), command = database)
+login_button = Button(root, text = 'Login', bg = 'red', fg = 'white', width = 20, relief ='raised', font = ('arial', 11), command = second_window)
+login_button.place(x = 210, y = 572)
+register_button = Button(root, text = 'Register', bg = 'red', fg = 'white', width = 10, font = ('arial', 12, 'bold'), command = database)
 register_button.place(x = 210, y = 470)
-quit_button = Button(root, text = 'Quit', bg = 'red', fg = 'white', font = ('arial', 12, 'bold'), command = exitApp)
-quit_button.place(x = 300, y = 470)
+quit_button = Button(root, text = 'Quit', bg = 'red', fg = 'white', width = 10, font = ('arial', 12, 'bold'), command = exitApp)
+quit_button.place(x = 320, y = 470)
 
 
 clock = Label(root, bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 20, 'bold'))
 clock.place(x = 450, y = 20)
 date = Label(root, text=f"{datetime.datetime.now():%a, %b %d %Y}", fg="white", bg="#004038", relief = 'raised', font=("arial", 10, 'bold'))
 date.place(x = 450, y = 60)
-
-
 
 
 

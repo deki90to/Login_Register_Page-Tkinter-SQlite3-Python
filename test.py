@@ -14,8 +14,8 @@ def Clock():
 
 
 def exitApp():
-    opt = tkinter.messagebox.askquestion('Exit application', 'Are you sure?')
-    if opt == 'yes':
+    opt_ex = tkinter.messagebox.askquestion('Exit application', 'Are you sure?')
+    if opt_ex == 'yes':
         root.destroy()
 
 def about():
@@ -33,12 +33,17 @@ def database():
     m = var2.get()
     y = var3.get()
 
-    conn = sqlite3.connect('database.db')
-    cur = conn.cursor()
-    cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
-    cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
-    conn.commit()
-    conn.close()
+
+    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
+        tkinter.messagebox.showinfo('Cannot register', 'Please fill up empty fields')
+
+    else:
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+        cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
+        conn.commit()
+        conn.close()
 
 
 def third_window():
@@ -115,7 +120,11 @@ def second_window():
                     window.destroy()
                     break
         else:
-            tkinter.messagebox.showwarning("Failed", "Wrong email or password")
+            if len(e_mail) == 0 and len(password) == 0:
+                tkinter.messagebox.showwarning("Failed", "Please fill up emptry fields")
+
+            else:
+                tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
 
 
@@ -176,7 +185,7 @@ label2 = Label(root, text = ' First name*', bg = '#004038', fg = 'white', relief
 label2.place(x = 100, y = 200)
 label3 = Label(root, text = ' Last name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label3.place(x = 100, y = 230)
-label4 = Label(root, text = ' Email*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label4 = Label(root, text = ' E-mail*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label4.place(x = 100, y = 260)
 label_pw = Label(root, text = ' Password*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label_pw.place(x = 100, y = 290)
@@ -189,9 +198,9 @@ b_d.place(x = 100, y = 365)
 label8 = Label(root, text = ' If you are already registred ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
 label8.place(x = 210, y = 540)
 label_r_pointer = Label(root, text = ' > ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
-label_r_pointer.place(x = 180 , y = 575 )
+label_r_pointer.place(x = 170 , y = 575 )
 label_l_pointer = Label(root, text = ' < ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
-label_l_pointer.place(x = 410, y = 575)
+label_l_pointer.place(x = 420, y = 575)
 
 
 entry2 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_fn)

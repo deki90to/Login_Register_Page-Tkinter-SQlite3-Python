@@ -35,7 +35,7 @@ def database():
 
 
     if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
-        tkinter.messagebox.showinfo('Cannot register', 'Please fill up empty fields')
+        tkinter.messagebox.showwarning('Cannot register', 'Please fill up empty fields')
 
     else:
         conn = sqlite3.connect('database.db')
@@ -121,7 +121,7 @@ def second_window():
                     break
         else:
             if len(e_mail) == 0 and len(password) == 0:
-                tkinter.messagebox.showwarning("Failed", "Please fill up emptry fields")
+                tkinter.messagebox.showwarning("Failed", "Please fill up empty fields")
 
             else:
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
@@ -189,18 +189,16 @@ label4 = Label(root, text = ' E-mail*', bg = '#004038', fg = 'white', relief = '
 label4.place(x = 100, y = 260)
 label_pw = Label(root, text = ' Password*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label_pw.place(x = 100, y = 290)
-label5 = Label(root, text = ' Country*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label5 = Label(root, text = ' Country ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label5.place(x = 100, y = 325)
-label7 = Label(root, text = ' Gendre*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label7 = Label(root, text = ' Gendre', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 label7.place(x = 100, y = 405)
-b_d = Label(root, text = ' Date of birth*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+b_d = Label(root, text = ' Date of birth', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
 b_d.place(x = 100, y = 365)
-label8 = Label(root, text = ' If you are already registred ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
-label8.place(x = 210, y = 540)
-label_r_pointer = Label(root, text = ' > ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
-label_r_pointer.place(x = 170 , y = 575 )
-label_l_pointer = Label(root, text = ' < ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
-label_l_pointer.place(x = 420, y = 575)
+label8 = Label(root, text = '      If you are already registred      ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
+label8.place(x = 190, y = 540)
+label_r_pointer = Label(root, text = ' > > ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
+label_r_pointer.place(x = 190 , y = 575 )
 
 
 entry2 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_fn)
@@ -216,7 +214,7 @@ entry_pw.place(x = 210, y = 290)
 list_country = ['Serbia', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Romania', 'Montenegro', 'Albanija', 'Macedonia']
 droplist = OptionMenu(root, var, *list_country)
 var.set('Select Country')
-droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.config(width = 14, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
 droplist.place(x = 210, y = 320)
 
 day = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
@@ -234,19 +232,19 @@ droplist.place(x = 300, y = 360)
 year = ['1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997' ,'1998', '1999', '2000']
 droplist = OptionMenu(root, var3, *year)
 var3.set('Select Year')
-droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.config(width = 10, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
 droplist.place(x = 400, y = 360)
 
 
 rbtn1 = Radiobutton(root, text = 'Male', value = 'Male', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove', font = ('arial', 10, 'bold'))
 rbtn1.place(x = 210, y = 405)
 rbtn2 = Radiobutton(root, text = 'Female', value = 'Female', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove', font = ('arial', 10, 'bold'))
-rbtn2.place(x = 280, y = 405)
+rbtn2.place(x = 300, y = 405)
 
 
 
-login_button = Button(root, text = 'Login', bg = 'red', fg = 'white', width = 20, relief ='raised', font = ('arial', 11), command = second_window)
-login_button.place(x = 210, y = 572)
+login_button = Button(root, text = 'Login', bg = 'red', fg = 'white', width = 20, relief ='raised', font = ('arial', 11, 'bold'), command = second_window)
+login_button.place(x = 235, y = 572)
 register_button = Button(root, text = 'Register', bg = 'red', fg = 'white', width = 10, font = ('arial', 12, 'bold'), command = database)
 register_button.place(x = 210, y = 470)
 quit_button = Button(root, text = 'Quit', bg = 'red', fg = 'white', width = 10, font = ('arial', 12, 'bold'), command = exitApp)

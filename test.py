@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter.messagebox
 import sqlite3
-from PIL import Image,ImageTk
+from PIL import Image, ImageTk
 import time
 import calendar
 import datetime
@@ -12,7 +12,6 @@ def Clock():
     clock.config(text = current_time)
     clock.after(100, Clock)
 
-
 def exitApp():
     opt_ex = tkinter.messagebox.askquestion('Exit application', 'Are you sure?')
     if opt_ex == 'yes':
@@ -20,7 +19,6 @@ def exitApp():
 
 def about():
     tkinter.messagebox.showinfo("About page", "This is a registration page")
-
 
 def database():
     firstname = ent_fn.get()
@@ -35,15 +33,23 @@ def database():
 
 
     if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
-        tkinter.messagebox.showwarning('Cannot register', 'Please fill up empty fields')
+            tkinter.messagebox.showwarning('Failed', 'Please fill up the empty fields')
 
     else:
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
-        cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
-        cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
-        conn.commit()
-        conn.close()
+        cur.execute("SELECT * FROM user")
+        read = cur.fetchall()
+
+        for i in read:
+            if i[2] == email:
+                tkinter.messagebox.showwarning('Failed', 'Email already exist')
+                break
+            else:
+                cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+                cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
+                conn.commit()
+                conn.close()
 
 
 def third_window():
@@ -53,7 +59,6 @@ def third_window():
     photo = PhotoImage(file = 'wallpaper.png')
     label = Label(window2, image = photo)
     label.pack()
-
 
     ent_rec = StringVar()
 
@@ -66,7 +71,6 @@ def third_window():
         cur.execute("SELECT * FROM user")
         read = cur.fetchall()
 
-
         for i in read:
             if rec == i[2]:
                 tkinter.messagebox.showinfo ("Success","Successfully sent! Password saved in 'your_password.txt' file")
@@ -74,21 +78,21 @@ def third_window():
                     file.write(i[3])
                     window2.destroy()
                     break
-
         else:
             mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
             if mail_n_f == 'no':
                 window2.destroy()
 
 
-    label_rc = Label(window2, text = ' Enter your email ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
+    label_rc = Label(window2, text = ' Enter email ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
     label_rc.place(x = 10, y = 28)
     entry_rec = Entry(window2, textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)
-    button_rec = Button(window2, text = 'Resend', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10), command = recover)
+    button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10), command = recover)
     button_rec.place(x = 145, y = 60)
 
     window2.mainloop()
+
 
 
 def second_window():
@@ -111,7 +115,6 @@ def second_window():
         cur.execute("SELECT * FROM user")
         read = cur.fetchall()
 
-
         for i in read:
             if e_mail == i[2] and password == i[3]:
                 tkinter.messagebox.showinfo("Success", "Login successfull, check 'result.txt' file")
@@ -126,8 +129,6 @@ def second_window():
             else:
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
-
-
     label_w2 = Label(window, text= ' Enter your email and password ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14))
     label_w2.place(x = 20, y = 100)
     label_w3 = Label(window, text = ' Email ', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
@@ -136,11 +137,12 @@ def second_window():
     label_w4.place(x = 30, y = 250)
     label_rec = Label(window, text = "Forget password? ", bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial',10,'bold'))
     label_rec.place(x = 210, y = 373)
-
+    
     entry_w3 = Entry(window ,textvar = ent_lg_em)
-    entry_w3.place(x = 120, y = 202)
+    entry_w3.place(x = 130, y = 202)
     entry_w4 = Entry(window, show = "*", textvar = ent_lg_pass)
-    entry_w4.place(x = 120, y = 252)
+    entry_w4.place(x = 130, y = 252)
+    
     btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10), command = login)
     btn_login.place(x = 125, y = 300)
     btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 7, font = ('bold',10), command = window.destroy)
@@ -148,9 +150,8 @@ def second_window():
     btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', command = third_window)
     btn_rec.place(x = 335 , y = 370)
 
-
-
     window.mainloop()
+
 
 
 root = Tk()
@@ -182,19 +183,19 @@ var3 = StringVar()
 label = Label(root, text = ' Registration ', bg = '#004038', fg = 'white', relief = 'ridge', font = ('Times', 30, 'bold'))
 label.place(x = 50, y = 80)
 label2 = Label(root, text = ' First name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-label2.place(x = 100, y = 200)
+label2.place(x = 80, y = 200)
 label3 = Label(root, text = ' Last name*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-label3.place(x = 100, y = 230)
+label3.place(x = 80, y = 230)
 label4 = Label(root, text = ' E-mail*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-label4.place(x = 100, y = 260)
+label4.place(x = 80, y = 260)
 label_pw = Label(root, text = ' Password*', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-label_pw.place(x = 100, y = 290)
+label_pw.place(x = 80, y = 290)
 label5 = Label(root, text = ' Country ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-label5.place(x = 100, y = 325)
-label7 = Label(root, text = ' Gendre', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-label7.place(x = 100, y = 405)
-b_d = Label(root, text = ' Date of birth', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
-b_d.place(x = 100, y = 365)
+label5.place(x = 80, y = 325)
+label7 = Label(root, text = ' Gendre ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+label7.place(x = 80, y = 405)
+b_d = Label(root, text = ' Date of birth ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12, 'bold'))
+b_d.place(x = 80, y = 365)
 label8 = Label(root, text = '      If you are already registred      ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
 label8.place(x = 190, y = 540)
 label_r_pointer = Label(root, text = ' > > ', bg = '#004038', fg = 'white', relief = 'sunken', font = ('arial', 12, 'bold'))
@@ -240,7 +241,6 @@ rbtn1 = Radiobutton(root, text = 'Male', value = 'Male', variable = rb1, bg = '#
 rbtn1.place(x = 210, y = 405)
 rbtn2 = Radiobutton(root, text = 'Female', value = 'Female', variable = rb1, bg = '#004038', fg = 'grey', relief = 'groove', font = ('arial', 10, 'bold'))
 rbtn2.place(x = 300, y = 405)
-
 
 
 login_button = Button(root, text = 'Login', bg = 'red', fg = 'white', width = 20, relief ='raised', font = ('arial', 11, 'bold'), command = second_window)

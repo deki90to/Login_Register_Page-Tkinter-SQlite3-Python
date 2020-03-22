@@ -45,11 +45,11 @@ def database():
             if i[2] == email:
                 tkinter.messagebox.showwarning('Failed', 'Email already exist')
                 break
-            else:
-                cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
-                cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
-                conn.commit()
-                conn.close()
+        else:
+            cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+            cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
+            conn.commit()
+            conn.close()
 
 
 def third_window():
@@ -84,11 +84,11 @@ def third_window():
                 window2.destroy()
 
 
-    label_rc = Label(window2, text = ' Enter email ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 12))
+    label_rc = Label(window2, text = ' Enter email ', bg = '#004038', fg = 'white', relief = 'raised', width = 11, font = ('arial', 12, 'bold'))
     label_rc.place(x = 10, y = 28)
     entry_rec = Entry(window2, textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)
-    button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10), command = recover)
+    button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
     button_rec.place(x = 145, y = 60)
 
     window2.mainloop()
@@ -97,7 +97,7 @@ def third_window():
 
 def second_window():
     window = Toplevel()
-    window.geometry('400x400')
+    window.geometry('410x400')
     window.title('Login Page')
     photo = PhotoImage(file = 'wallpaper.png')
     label = Label(window, image = photo)
@@ -129,25 +129,25 @@ def second_window():
             else:
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
-    label_w2 = Label(window, text= ' Enter your email and password ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14))
+    label_w2 = Label(window, text= ' Enter your email and password ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14, 'bold'))
     label_w2.place(x = 20, y = 100)
-    label_w3 = Label(window, text = ' Email ', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
+    label_w3 = Label(window, text = ' Email ', bg = '#004038', fg = 'white', relief = 'raised', width = 9, font = ('arial', 11, 'bold'))
     label_w3.place(x = 30, y = 200)
-    label_w4 = Label(window, text = ' Password ', bg = '#004038', fg = 'white', font = ('arial', 12), relief = 'raised')
+    label_w4 = Label(window, text = ' Password ', bg = '#004038', fg = 'white', relief = 'raised', width = 9, font = ('arial', 11, 'bold'))
     label_w4.place(x = 30, y = 250)
-    label_rec = Label(window, text = "Forget password? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',10,'bold'))
-    label_rec.place(x = 210, y = 373)
+    label_rec = Label(window, text = "Password forgotten? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',10))
+    label_rec.place(x = 210, y = 370)
     
     entry_w3 = Entry(window ,textvar = ent_lg_em)
     entry_w3.place(x = 130, y = 202)
     entry_w4 = Entry(window, show = "*", textvar = ent_lg_pass)
     entry_w4.place(x = 130, y = 252)
     
-    btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10), command = login)
+    btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = login)
     btn_login.place(x = 125, y = 300)
-    btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 7, font = ('bold',10), command = window.destroy)
+    btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = window.destroy)
     btn_cancel.place(x = 190, y = 300)
-    btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', command = third_window)
+    btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', font = ('arial', 9, 'bold'), command = third_window)
     btn_rec.place(x = 335 , y = 370)
 
     window.mainloop()

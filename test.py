@@ -35,6 +35,9 @@ def database():
     if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
             tkinter.messagebox.showwarning('Failed', 'Please fill up the empty fields')
 
+    elif '@' not in email or '.' not in email:
+        tkinter.messagebox.showwarning('Error', 'Email not entered correctly')
+
     else:
         conn = sqlite3.connect('database.db')
         cur = conn.cursor()
@@ -43,7 +46,7 @@ def database():
 
         for i in read:
             if i[2] == email:
-                tkinter.messagebox.showwarning('Failed', 'Email already exist')
+                tkinter.messagebox.showwarning('Registration failed', 'Email already exist')
                 break
         else:
             cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
@@ -78,6 +81,7 @@ def third_window():
                     file.write(i[3])
                     window2.destroy()
                     break
+
         else:
             mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
             if mail_n_f == 'no':
@@ -106,7 +110,9 @@ def second_window():
     ent_lg_em = StringVar()
     ent_lg_pass = StringVar()
 
+
     def login():
+
         e_mail = ent_lg_em.get()
         password = ent_lg_pass.get()
 
@@ -122,12 +128,13 @@ def second_window():
                     file.write(str(i))
                     window.destroy()
                     break
+
         else:
             if len(e_mail) == 0 and len(password) == 0:
                 tkinter.messagebox.showwarning("Failed", "Please fill up empty fields")
-
             else:
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
+
 
     label_w2 = Label(window, text= ' Enter your email and password ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14, 'bold'))
     label_w2.place(x = 20, y = 100)

@@ -20,40 +20,6 @@ def exitApp():
 def about():
     tkinter.messagebox.showinfo("About page", "This is a registration page")
 
-def database():
-    firstname = ent_fn.get()
-    lastname = ent_ln.get()
-    email = ent_em.get()
-    password = ent_pass.get()
-    state = var.get()
-    gendr = rb1.get()
-    d = var1.get()
-    m = var2.get()
-    y = var3.get()
-
-
-    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
-            tkinter.messagebox.showwarning('Failed', 'Please fill up the empty fields')
-
-    elif '@' not in email or '.' not in email:
-        tkinter.messagebox.showwarning('Error', 'Email not entered correctly')
-
-    else:
-        conn = sqlite3.connect('database.db')
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM user")
-        read = cur.fetchall()
-
-        for i in read:
-            if i[2] == email:
-                tkinter.messagebox.showwarning('Registration failed', 'Email already exist')
-                break
-        else:
-            cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
-            cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
-            conn.commit()
-            conn.close()
-
 
 def third_window():
     window2 = Toplevel()
@@ -81,7 +47,6 @@ def third_window():
                     file.write(i[3])
                     window2.destroy()
                     break
-
         else:
             mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
             if mail_n_f == 'no':
@@ -110,7 +75,6 @@ def second_window():
     ent_lg_em = StringVar()
     ent_lg_pass = StringVar()
 
-
     def login():
 
         e_mail = ent_lg_em.get()
@@ -128,10 +92,9 @@ def second_window():
                     file.write(str(i))
                     window.destroy()
                     break
-
         else:
-            if len(e_mail) == 0 and len(password) == 0:
-                tkinter.messagebox.showwarning("Failed", "Please fill up empty fields")
+            if len(e_mail) == 0 or len(password) == 0:
+                tkinter.messagebox.showwarning("Failed", "Please fill up the empty fields")
             else:
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
@@ -176,6 +139,40 @@ submenu1.add_command(label = 'Exit', command = root.destroy)
 submenu2 = Menu(menu)
 menu.add_cascade(label = 'Options', menu = submenu2)
 submenu2.add_command(label = 'About', command = about)
+
+def database():
+    firstname = ent_fn.get()
+    lastname = ent_ln.get()
+    email = ent_em.get()
+    password = ent_pass.get()
+    state = var.get()
+    gendr = rb1.get()
+    d = var1.get()
+    m = var2.get()
+    y = var3.get()
+
+
+    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
+            tkinter.messagebox.showwarning('Failed', 'Please fill up the empty fields')
+
+    elif '@' not in email or '.' not in email:
+        tkinter.messagebox.showwarning('Error', 'Email not entered correctly')
+
+    else:
+        conn = sqlite3.connect('database.db')
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM user")
+        read = cur.fetchall()
+
+        for i in read:
+            if i[2] == email:
+                tkinter.messagebox.showwarning('Registration failed', 'Email already exist')
+                break
+        else:
+            cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+            cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
+            conn.commit()
+            conn.close()
 
 ent_fn = StringVar()
 ent_ln = StringVar()

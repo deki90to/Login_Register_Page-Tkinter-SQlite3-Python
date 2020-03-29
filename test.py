@@ -94,7 +94,7 @@ def second_window():
                     break
         else:
             if len(e_mail) == 0 or len(password) == 0:
-                tkinter.messagebox.showwarning("Failed", "Please fill up the empty fields")
+                tkinter.messagebox.showwarning("Failed", "Please fill up required fields")
             else:
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
@@ -145,6 +145,7 @@ def database():
     lastname = ent_ln.get()
     email = ent_em.get()
     password = ent_pass.get()
+    password2 = ent_pass2.get()
     state = var.get()
     gendr = rb1.get()
     d = var1.get()
@@ -152,11 +153,15 @@ def database():
     y = var3.get()
 
 
-    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0:
-            tkinter.messagebox.showwarning('Failed', 'Please fill up the empty fields')
+    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0 \
+     or len(state) == 0 or len(gendr) == 0 or len(d) == 0 or len(m) == 0 or len(y) == 0:
+        tkinter.messagebox.showwarning('Failed', 'Please fill up all required fields')
 
     elif '@' not in email or '.' not in email:
         tkinter.messagebox.showwarning('Error', 'Email not entered correctly')
+
+    elif password2 != password:
+        tkinter.messagebox.showwarning('Error', 'Passwords not equal')
 
     else:
         conn = sqlite3.connect('database.db')
@@ -169,8 +174,11 @@ def database():
                 tkinter.messagebox.showwarning('Registration failed', 'Email already exist')
                 break
         else:
-            cur.execute('CREATE TABLE IF NOT EXISTS user (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
-            cur.execute('INSERT INTO user (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',(firstname, lastname, email, password, state, gendr, d, m, y,))
+            cur.execute('CREATE TABLE IF NOT EXISTS user \
+                (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+            cur.execute('INSERT INTO user \
+                (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',\
+                (firstname, lastname, email, password, state, gendr, d, m, y,))
             conn.commit()
             conn.close()
 
@@ -178,11 +186,13 @@ ent_fn = StringVar()
 ent_ln = StringVar()
 ent_em = StringVar()
 ent_pass = StringVar()
+ent_pass2 = StringVar()
 var = StringVar()
 rb1 = StringVar()
 var1 = StringVar()
 var2 = StringVar()
 var3 = StringVar()
+
 
 label = Label(root, text = ' Registration ', bg = '#004038', fg = 'white', width = 11, relief = 'ridge', font = ('Times', 30, 'bold'))
 label.place(x = 50, y = 80)
@@ -210,6 +220,8 @@ entry4 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_em)
 entry4.place(x = 210, y = 260)
 entry_pw = Entry(root, font = ('arial', 10, 'bold'), show = '*', textvar = ent_pass)
 entry_pw.place(x = 210, y = 290)
+entry_pw2 = Entry(root, font = ('arial', 10, 'bold'), show = '*', textvar = ent_pass2)
+entry_pw2.place(x = 360, y = 290)
 
 
 list_country = ['Serbia', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Romania', 'Montenegro', 'Albanija', 'Macedonia']

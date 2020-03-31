@@ -12,6 +12,12 @@ def Clock():
     clock.config(text = current_time)
     clock.after(100, Clock)
 
+
+'''
+    QUIT BUTTON
+        IF CLICKED, ASKIND USER TO CONFIRM QUITING
+        IF USER CLICK 'YES', WINDOW CLOSES
+'''
 def exitApp():
     opt_ex = tkinter.messagebox.askquestion('Exit application', 'Are you sure?')
     if opt_ex == 'yes':
@@ -21,6 +27,15 @@ def about():
     tkinter.messagebox.showinfo("About page", "This is a registration page")
 
 
+
+
+''' 
+    THIRD WINDOW - CHECK-OUT PASSWORD
+        CONNECTING TO DATABASE, SELECT ALL FROM USER
+        IF ENTRED EMAIL IS EQUAL TO SOME EMAIL IN DATABASE, WRITE THAT PASSWORD TO 'YOUR PASSWORD.TXT' FILE
+        ELSE SEND A MESSAGE 'EMAIL NOT FOUND' AND ASK USER IF HE WANTS TO TRY AGAIN
+        IF USER SAY 'NO', WINDOW CLOSES
+'''
 def third_window():
     window2 = Toplevel()
     window2.geometry('300x100')
@@ -42,13 +57,18 @@ def third_window():
 
         for i in read:
             if rec == i[2]:
-                tkinter.messagebox.showinfo ("Success","Successfully sent! Password saved in 'your_password.txt' file")
+                tkinter.messagebox.showinfo("Success", "Successfully sent! Password saved in 'your_password.txt' file")
                 with open('your_password.txt','w') as file:
                     file.write(i[3])
                     window2.destroy()
                     break
+
+            elif len(rec) == 0:
+                tkinter.messagebox.showinfo('Not found', 'Empty field, please enter email')
+                break
+
         else:
-            mail_n_f = tkinter.messagebox.askquestion('Not found','Email not found, do you want to try again?')
+            mail_n_f = tkinter.messagebox.askquestion('Not found', 'Email not found, do you want to try again?')
             if mail_n_f == 'no':
                 window2.destroy()
 
@@ -64,6 +84,14 @@ def third_window():
 
 
 
+''' 
+    SECOND WINDOW - LOGIN
+        GETTING EMAIL AND PASSWORD FROM LOGIN FIELDS
+        CONNECTING TO DATABASE, SELECT ALL FROM USER
+        CHECKING IF EMAIL AND PASSWORD EXIST IN DATABASE
+        IF THEY EXIST, USER-DATA ARE WRITED IN RESULT.TXT FILE
+        IF LENGHT OF EMAIL OR PASSWORD ARE 0, SEND A MESSAGE TO USER
+'''
 def second_window():
     window = Toplevel()
     window.geometry('410x400')
@@ -124,12 +152,23 @@ def second_window():
 
 
 
+''' 
+    FIRST WINDOW - MAIN WINDOW FOR REGISTRATION
+        IF FIELDS ARE EMPTY, ASK USER TO FILL UP ALL FIELDS
+        IF EMAIL DONT CONTAINS '@' OR '.', EMAIL IS NOT GOOD
+        CHECK IF PASSWORDS ARE THE SAME
+        CONNECTING TO DATABASE, SELECT ALL FROM USER
+        CHECK IF EMAIL ALREADY EXIST IN DATABASE
+        IF EMAIL DONT EXIST, DATAS ARE WRITED IN
+'''
 root = Tk()
 root.geometry('600x580')
 root.title('Register Page')
 photo = PhotoImage(file = 'wallpaper.png')
 label = Label(root, image=photo)
 label.pack()
+
+# OPTIONS AT THE TOP OF THE PAGE (NOT IMPORTANT)
 
 menu = Menu(root)
 root.config(menu = menu)
@@ -223,6 +262,7 @@ entry_pw.place(x = 210, y = 290)
 entry_pw2 = Entry(root, font = ('arial', 10, 'bold'), show = '*', textvar = ent_pass2)
 entry_pw2.place(x = 355, y = 290)
 
+# DROP-DOWN MENUS
 
 list_country = ['Serbia', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Romania', 'Montenegro', 'Albanija', 'Macedonia']
 droplist = OptionMenu(root, var, *list_country)

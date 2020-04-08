@@ -38,7 +38,7 @@ def about():
 '''
 def third_window():
     window2 = Toplevel()
-    window2.geometry('300x100')
+    window2.geometry('300x120')
     window2.title('Password Recovery')
     photo = PhotoImage(file = 'wallpaper.png')
     label = Label(window2, image = photo)
@@ -74,11 +74,11 @@ def third_window():
 
 
     label_rc = Label(window2, text = ' Enter email ', bg = '#004038', fg = 'white', relief = 'raised', width = 11, font = ('arial', 12, 'bold'))
-    label_rc.place(x = 10, y = 28)
-    entry_rec = Entry(window2, textvar = ent_rec)
+    label_rc.place(x = 10, y = 30)
+    entry_rec = Entry(window2, bd = 4, relief = 'sunken', textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)
     button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
-    button_rec.place(x = 145, y = 60)
+    button_rec.place(x = 150, y = 70)
 
     window2.mainloop()
 
@@ -133,22 +133,23 @@ def second_window():
     label_w3.place(x = 30, y = 200)
     label_w4 = Label(window, text = ' Password ', bg = '#004038', fg = 'white', relief = 'raised', width = 9, font = ('arial', 11, 'bold'))
     label_w4.place(x = 30, y = 250)
-    label_rec = Label(window, text = "Password forgotten? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',10))
-    label_rec.place(x = 210, y = 370)
+    label_rec = Label(window, text = "Password forgotten? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',9))
+    label_rec.place(x = 210, y = 375)
     
-    entry_w3 = Entry(window ,textvar = ent_lg_em)
-    entry_w3.place(x = 130, y = 202)
-    entry_w4 = Entry(window, show = "*", textvar = ent_lg_pass)
-    entry_w4.place(x = 130, y = 252)
+    entry_w3 = Entry(window, bd = 4, relief = 'sunken', textvar = ent_lg_em)
+    entry_w3.place(x = 130, y = 200)
+    entry_w4 = Entry(window, bd = 4, relief = 'sunken', show = "*", textvar = ent_lg_pass)
+    entry_w4.place(x = 130, y = 250)
     
     btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = login)
-    btn_login.place(x = 125, y = 300)
+    btn_login.place(x = 130, y = 305)
     btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = window.destroy)
-    btn_cancel.place(x = 190, y = 300)
-    btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', font = ('arial', 9, 'bold'), command = third_window)
-    btn_rec.place(x = 335 , y = 370)
+    btn_cancel.place(x = 195, y = 305)
+    btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', font = ('arial', 8, 'bold'), command = third_window)
+    btn_rec.place(x = 340 , y = 375)
 
     window.mainloop()
+
 
 
 
@@ -251,15 +252,15 @@ label7 = Label(root, text = ' Gendre ', bg = '#004038', fg = 'white', width = 11
 label7.place(x = 80, y = 400)
 
 
-entry2 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_fn)
+entry2 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', textvar = ent_fn)
 entry2.place(x = 210, y = 200)
-entry3 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_ln)
+entry3 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', textvar = ent_ln)
 entry3.place(x = 210, y = 230)
-entry4 = Entry(root, font = ('arial', 10, 'bold'), textvar = ent_em)
+entry4 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', textvar = ent_em)
 entry4.place(x = 210, y = 260)
-entry_pw = Entry(root, font = ('arial', 10, 'bold'), show = '*', textvar = ent_pass)
+entry_pw = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', show = '*', textvar = ent_pass)
 entry_pw.place(x = 210, y = 290)
-entry_pw2 = Entry(root, font = ('arial', 10, 'bold'), show = '*', textvar = ent_pass2)
+entry_pw2 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', show = '*', textvar = ent_pass2)
 entry_pw2.place(x = 355, y = 290)
 
 # DROP-DOWN MENUS

@@ -73,7 +73,7 @@ def third_window():
                 window2.destroy()
 
 
-    label_rc = Label(window2, text = ' Enter email ', bg = '#004038', fg = 'white', relief = 'raised', width = 11, font = ('arial', 12, 'bold'))
+    label_rc = Label(window2, text = ' Enter email   >', bg = '#004038', fg = 'white', relief = 'raised', width = 11, font = ('arial', 12, 'bold'))
     label_rc.place(x = 10, y = 30)
     entry_rec = Entry(window2, bd = 4, relief = 'sunken', textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)

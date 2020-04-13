@@ -198,10 +198,13 @@ def database():
         tkinter.messagebox.showwarning('Failed', 'Please fill up all required fields')
 
     elif '@' not in email or '.' not in email:
-        tkinter.messagebox.showwarning('Error', 'Email not entered correctly')
+        tkinter.messagebox.showwarning('Failed', 'Email not entered correctly')
 
     elif password2 != password:
-        tkinter.messagebox.showwarning('Error', 'Passwords not equal')
+        tkinter.messagebox.showwarning('Failed', 'Passwords not match')
+
+    elif len(password) < 6 and len(password2) < 6:
+        tkinter.messagebox.showwarning('Failed', 'Password too short')
 
     else:
         conn = sqlite3.connect('database.db')

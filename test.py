@@ -67,6 +67,10 @@ def third_window():
                 tkinter.messagebox.showinfo('Not found', 'Empty field, please enter email')
                 break
 
+            elif '@' not in rec and '.' not in rec:
+                tkinter.messagebox.showinfo('Failed', 'Email not entred correctly')
+                break
+
         else:
             mail_n_f = tkinter.messagebox.askquestion('Not found', 'Email not found, do you want to try again?')
             if mail_n_f == 'no':
@@ -127,8 +131,8 @@ def second_window():
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
 
-    label_w2 = Label(window, text= ' Enter your email and password ', bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 14, 'bold'))
-    label_w2.place(x = 20, y = 100)
+    label_w2 = Label(window, text= ' Login ', bg = '#004038', fg = 'white', width = 10, relief = 'ridge', font = ('Times', 25, 'bold'))
+    label_w2.place(x = 50, y = 80)
     label_w3 = Label(window, text = ' Email         >', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'bold'))
     label_w3.place(x = 30, y = 200)
     label_w4 = Label(window, text = ' Password >', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'bold'))

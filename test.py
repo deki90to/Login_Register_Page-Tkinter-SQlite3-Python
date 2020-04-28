@@ -28,7 +28,7 @@ def third_window():
     window2 = Toplevel()
     window2.geometry('300x120')
     window2.title('Password Recovery')
-    photo = PhotoImage(file = 'wallpaper.png')
+    photo = PhotoImage(file = 'wallpaper2.png')
     label = Label(window2, image = photo)
     label.pack()
 
@@ -81,7 +81,7 @@ def second_window():
     window = Toplevel()
     window.geometry('410x400')
     window.title('Login Page')
-    photo = PhotoImage(file = 'wallpaper.png')
+    photo = PhotoImage(file = 'wallpaper2.png')
     label = Label(window, image = photo)
     label.pack()
 
@@ -142,7 +142,7 @@ def second_window():
 root = Tk()
 root.geometry('600x580')
 root.title('Register Page')
-photo = PhotoImage(file = 'wallpaper.png')
+photo = PhotoImage(file = 'wallpaper2.png')
 label = Label(root, image=photo)
 label.pack()
 

@@ -9,15 +9,10 @@ import datetime
 
 def Clock():
     current_time = time.strftime("%H:%M:%S")
-    clock.config(text = current_time)
+    clock.config(text = current_time, font=('arial',20,'italic'))
     clock.after(100, Clock)
 
 
-'''
-    QUIT BUTTON
-        IF CLICKED, ASKIND USER TO CONFIRM QUITING
-        IF USER CLICK 'YES', WINDOW CLOSES
-'''
 def exitApp():
     opt_ex = tkinter.messagebox.askquestion('Exit application', 'Are you sure?')
     if opt_ex == 'yes':
@@ -27,15 +22,8 @@ def about():
     tkinter.messagebox.showinfo("About page", "This is a registration page")
 
 
+# TRECI PROZOR
 
-
-''' 
-    THIRD WINDOW - CHECK-OUT PASSWORD
-        CONNECTING TO DATABASE, SELECT ALL FROM USER
-        IF ENTRED EMAIL IS EQUAL TO SOME EMAIL IN DATABASE, WRITE THAT PASSWORD TO 'YOUR PASSWORD.TXT' FILE
-        ELSE SEND A MESSAGE 'EMAIL NOT FOUND' AND ASK USER IF HE WANTS TO TRY AGAIN
-        IF USER SAY 'NO', WINDOW CLOSES
-'''
 def third_window():
     window2 = Toplevel()
     window2.geometry('300x120')
@@ -67,7 +55,7 @@ def third_window():
                 tkinter.messagebox.showinfo('Not found', 'Empty field, please enter email')
                 break
 
-            elif '@' not in rec and '.' not in rec:
+            elif '@' not in rec or '.' not in rec:
                 tkinter.messagebox.showinfo('Failed', 'Email not entred correctly')
                 break
 
@@ -77,9 +65,9 @@ def third_window():
                 window2.destroy()
 
 
-    label_rc = Label(window2, text = ' Enter email   >', bg = '#004038', fg = 'white', relief = 'raised', width = 11, font = ('arial', 12, 'bold'))
+    label_rc = Label(window2, text = ' Enter email   ►', bg = '#004038', fg = 'white', relief = 'raised', width = 12, font = ('arial', 12, 'italic'))
     label_rc.place(x = 10, y = 30)
-    entry_rec = Entry(window2, bd = 4, relief = 'sunken', textvar = ent_rec)
+    entry_rec = Entry(window2, bd = 4, relief = 'sunken', font = ('arial', 9, 'italic'), textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)
     button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
     button_rec.place(x = 150, y = 70)
@@ -87,15 +75,8 @@ def third_window():
     window2.mainloop()
 
 
+# DRUGI PROZOR
 
-''' 
-    SECOND WINDOW - LOGIN
-        GETTING EMAIL AND PASSWORD FROM LOGIN FIELDS
-        CONNECTING TO DATABASE, SELECT ALL FROM USER
-        CHECKING IF EMAIL AND PASSWORD EXIST IN DATABASE
-        IF THEY EXIST, USER-DATA ARE WRITED IN RESULT.TXT FILE
-        IF LENGHT OF EMAIL OR PASSWORD ARE 0, SEND A MESSAGE TO USER
-'''
 def second_window():
     window = Toplevel()
     window.geometry('410x400')
@@ -131,18 +112,18 @@ def second_window():
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
 
-    label_w2 = Label(window, text= ' Login ', bg = '#004038', fg = 'white', width = 10, relief = 'ridge', font = ('Times', 25, 'bold'))
+    label_w2 = Label(window, text= ' Login ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', font = ('Times', 25, 'italic'))
     label_w2.place(x = 50, y = 80)
-    label_w3 = Label(window, text = ' Email         >', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'bold'))
+    label_w3 = Label(window, text = ' Email         ►', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'italic'))
     label_w3.place(x = 30, y = 200)
-    label_w4 = Label(window, text = ' Password >', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'bold'))
+    label_w4 = Label(window, text = ' Password  ►', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'italic'))
     label_w4.place(x = 30, y = 250)
-    label_rec = Label(window, text = "Password forgotten? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',9))
+    label_rec = Label(window, text = "Password forgotten? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',9,'italic'))
     label_rec.place(x = 210, y = 375)
     
-    entry_w3 = Entry(window, bd = 4, relief = 'sunken', textvar = ent_lg_em)
+    entry_w3 = Entry(window, bd = 4, relief = 'sunken', font = ('arial', 9, 'italic'), textvar = ent_lg_em)
     entry_w3.place(x = 140, y = 200)
-    entry_w4 = Entry(window, bd = 4, relief = 'sunken', show = "*", textvar = ent_lg_pass)
+    entry_w4 = Entry(window, bd = 4, relief = 'sunken', show = "*", font = ('arial', 9, 'italic'), textvar = ent_lg_pass)
     entry_w4.place(x = 140, y = 250)
     
     btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = login)
@@ -156,16 +137,8 @@ def second_window():
 
 
 
+# PRVI PROZOR
 
-''' 
-    FIRST WINDOW - MAIN WINDOW FOR REGISTRATION
-        IF FIELDS ARE EMPTY, ASK USER TO FILL UP ALL FIELDS
-        IF EMAIL DONT CONTAINS '@' OR '.', EMAIL IS NOT GOOD
-        CHECK IF PASSWORDS ARE THE SAME
-        CONNECTING TO DATABASE, SELECT ALL FROM USER
-        CHECK IF EMAIL ALREADY EXIST IN DATABASE
-        IF EMAIL DONT EXIST, DATAS ARE WRITED IN
-'''
 root = Tk()
 root.geometry('600x580')
 root.title('Register Page')
@@ -173,7 +146,6 @@ photo = PhotoImage(file = 'wallpaper.png')
 label = Label(root, image=photo)
 label.pack()
 
-# OPTIONS AT THE TOP OF THE PAGE (NOT IMPORTANT)
 
 menu = Menu(root)
 root.config(menu = menu)
@@ -241,33 +213,33 @@ var2 = StringVar()
 var3 = StringVar()
 
 
-label = Label(root, text = ' Registration ', bg = '#004038', fg = 'white', width = 11, relief = 'ridge', font = ('Times', 30, 'bold'))
+label = Label(root, text = ' Register ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', font = ('Times', 30, 'italic'))
 label.place(x = 50, y = 80)
-label2 = Label(root, text = ' First name    >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+label2 = Label(root, text = ' First name    ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label2.place(x = 80, y = 200)
-label3 = Label(root, text = ' Last name    >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+label3 = Label(root, text = ' Last name    ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label3.place(x = 80, y = 230)
-label4 = Label(root, text = ' E-mail            >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+label4 = Label(root, text = ' E-mail           ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label4.place(x = 80, y = 260)
-label_pw = Label(root, text = ' Password    >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+label_pw = Label(root, text = ' Password     ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label_pw.place(x = 80, y = 290)
-label5 = Label(root, text = ' Country        >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+label5 = Label(root, text = ' Country        ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label5.place(x = 80, y = 325)
-b_d = Label(root, text = ' Date of birth >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+b_d = Label(root, text = ' Date of birth ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 b_d.place(x = 80, y = 360)
-label7 = Label(root, text = ' Gendre          >', bg = '#004038', fg = 'white', width = 11, relief = 'raised', font = ('arial', 12, 'bold'))
+label7 = Label(root, text = ' Gendre          ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label7.place(x = 80, y = 400)
 
 
-entry2 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', textvar = ent_fn)
+entry2 = Entry(root, font = ('arial', 10, 'italic'), bd = 4, relief = 'sunken', textvar = ent_fn)
 entry2.place(x = 210, y = 200)
-entry3 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', textvar = ent_ln)
+entry3 = Entry(root, font = ('arial', 10, 'italic'), bd = 4, relief = 'sunken', textvar = ent_ln)
 entry3.place(x = 210, y = 230)
-entry4 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', textvar = ent_em)
+entry4 = Entry(root, font = ('arial', 10, 'italic'), bd = 4, relief = 'sunken', textvar = ent_em)
 entry4.place(x = 210, y = 260)
-entry_pw = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', show = '*', textvar = ent_pass)
+entry_pw = Entry(root, font = ('arial', 10, 'italic'), bd = 4, relief = 'sunken', show = '*', textvar = ent_pass)
 entry_pw.place(x = 210, y = 290)
-entry_pw2 = Entry(root, font = ('arial', 10, 'bold'), bd = 4, relief = 'sunken', show = '*', textvar = ent_pass2)
+entry_pw2 = Entry(root, font = ('arial', 10, 'italic'), bd = 4, relief = 'sunken', show = '*', textvar = ent_pass2)
 entry_pw2.place(x = 355, y = 290)
 
 # DROP-DOWN MENUS
@@ -275,31 +247,31 @@ entry_pw2.place(x = 355, y = 290)
 list_country = ['Serbia', 'Croatia', 'Bulgaria', 'Bosnia and Herzegovina', 'Romania', 'Montenegro', 'Albanija', 'Macedonia']
 droplist = OptionMenu(root, var, *list_country)
 var.set('Select Country')
-droplist.config(width = 14, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.config(width = 14, bg = '#004038', fg = 'grey', font = ('arial', 9, 'italic'))
 droplist.place(x = 210, y = 325)
 
 day = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
 droplist = OptionMenu (root, var1, *day)
 var1.set('Select Day')
-droplist.config(width = 10, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.config(width = 10, bg = '#004038', fg = 'grey', font = ('arial', 9, 'italic'))
 droplist.place(x = 210, y = 360)
 
 month = ['January', 'February', 'March', 'April', 'May', 'July', 'Jul', 'August', 'September', 'October', 'November', 'December']
 droplist = OptionMenu(root, var2, *month)
 var2.set('Select Month')
-droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.config(width = 12, bg = '#004038', fg = 'grey', font = ('arial', 9, 'italic'))
 droplist.place(x = 300, y = 360)
 
 year = ['1980', '1981', '1982', '1983', '1984', '1985', '1986', '1987', '1988', '1989', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997' ,'1998', '1999', '2000']
 droplist = OptionMenu(root, var3, *year)
 var3.set('Select Year')
-droplist.config(width = 10, bg = '#004038', fg = 'grey', font = ('arial', 9, 'bold'))
+droplist.config(width = 10, bg = '#004038', fg = 'grey', font = ('arial', 9, 'italic'))
 droplist.place(x = 400, y = 360)
 
 
-rbtn1 = Radiobutton(root, text = 'Male', value = 'Male', variable = rb1, bg = '#004038', fg = 'grey', width = 7, relief = 'raised', font = ('arial', 10, 'bold'))
+rbtn1 = Radiobutton(root, text = 'Male', value = 'Male', variable = rb1, bg = '#004038', fg = 'grey', width = 7, relief = 'raised', font = ('arial', 10, 'italic'))
 rbtn1.place(x = 210, y = 400)
-rbtn2 = Radiobutton(root, text = 'Female', value = 'Female', variable = rb1, bg = '#004038', fg = 'grey', width = 7, relief = 'raised', font = ('arial', 10, 'bold'))
+rbtn2 = Radiobutton(root, text = 'Female', value = 'Female', variable = rb1, bg = '#004038', fg = 'grey', width = 7, relief = 'raised', font = ('arial', 10, 'italic'))
 rbtn2.place(x = 295, y = 400)
 
 

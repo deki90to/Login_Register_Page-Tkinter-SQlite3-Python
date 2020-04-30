@@ -69,7 +69,7 @@ def third_window():
     label_rc.place(x = 10, y = 30)
     entry_rec = Entry(window2, bd = 4, relief = 'sunken', font = ('arial', 9, 'italic'), textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)
-    button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 13, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
+    button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 15, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
     button_rec.place(x = 150, y = 70)
 
     window2.mainloop()
@@ -118,20 +118,20 @@ def second_window():
     label_w3.place(x = 30, y = 200)
     label_w4 = Label(window, text = ' Password  ►', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'italic'))
     label_w4.place(x = 30, y = 250)
-    label_rec = Label(window, text = "Password forgotten? ", bg = '#004038', fg = 'white', relief = 'raised', font = ('arial',9,'italic'))
-    label_rec.place(x = 210, y = 375)
+
     
     entry_w3 = Entry(window, bd = 4, relief = 'sunken', font = ('arial', 9, 'italic'), textvar = ent_lg_em)
     entry_w3.place(x = 140, y = 200)
     entry_w4 = Entry(window, bd = 4, relief = 'sunken', show = "*", font = ('arial', 9, 'italic'), textvar = ent_lg_pass)
     entry_w4.place(x = 140, y = 250)
     
-    btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = login)
+
+    btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 8, font = ('bold',10, 'bold'), command = login)
     btn_login.place(x = 140, y = 305)
-    btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 7, font = ('bold',10, 'bold'), command = window.destroy)
-    btn_cancel.place(x = 205, y = 305)
-    btn_rec = Button(window, text = 'Click here', bg = 'red', fg = 'white', relief = 'raised', font = ('arial', 8, 'bold'), command = third_window)
-    btn_rec.place(x = 340 , y = 375)
+    btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 8, font = ('bold',10, 'bold'), command = window.destroy)
+    btn_cancel.place(x = 214, y = 305)
+    btn_rec = Button(window, text = "Can't remember password", bg = 'dark red', fg = 'white', relief = 'raised', font = ('arial', 8, 'bold'), command = third_window)
+    btn_rec.place(x = 250 , y = 375)
 
     window.mainloop()
 
@@ -223,6 +223,8 @@ label4 = Label(root, text = ' E-mail           ►', bg = '#004038', fg = 'white
 label4.place(x = 80, y = 260)
 label_pw = Label(root, text = ' Password     ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label_pw.place(x = 80, y = 290)
+label_pw2 = Label(root, text='Confirm Password', bg = '#004038', fg = 'white', font = ('arial', 8, 'italic'))
+label_pw2.place(x = 380, y = 320)
 label5 = Label(root, text = ' Country        ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label5.place(x = 80, y = 325)
 b_d = Label(root, text = ' Date of birth ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))

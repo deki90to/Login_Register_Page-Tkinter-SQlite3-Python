@@ -115,9 +115,9 @@ def second_window():
     label_w2 = Label(window, text= ' Login ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', font = ('Times', 25, 'italic'))
     label_w2.place(x = 50, y = 80)
     label_w3 = Label(window, text = ' Email         ►', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'italic'))
-    label_w3.place(x = 30, y = 200)
+    label_w3.place(x = 30, y = 202)
     label_w4 = Label(window, text = ' Password  ►', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'italic'))
-    label_w4.place(x = 30, y = 250)
+    label_w4.place(x = 30, y = 252)
 
     
     entry_w3 = Entry(window, bd = 4, relief = 'sunken', font = ('arial', 9, 'italic'), textvar = ent_lg_em)
@@ -204,7 +204,7 @@ def database():
 ent_fn = StringVar()
 ent_ln = StringVar()
 ent_em = StringVar()
-ent_pass = StringVar()
+ent_pass = StringVar() 
 ent_pass2 = StringVar()
 var = StringVar()
 rb1 = StringVar()

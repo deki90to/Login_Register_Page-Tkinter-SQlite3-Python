@@ -47,7 +47,7 @@ def third_window():
             if rec == i[2]:
                 tkinter.messagebox.showinfo("Success", "Successfully sent! Password saved in 'your_password.txt' file")
                 with open('your_password.txt','w') as file:
-                    file.write(i[3])
+                    file.write(f'Your password is: {i[3]}')
                     window2.destroy()
                     break
 
@@ -102,7 +102,7 @@ def second_window():
             if e_mail == i[2] and password == i[3]:
                 tkinter.messagebox.showinfo("Success", "Login successfull, check 'result.txt' file")
                 with open('result.txt','w') as file:
-                    file.write(str(i))
+                    file.write(f'First Name: {str(i[0])}\nLast Name: {str(i[1])}\nE-mail: {str(i[2])}\nPassword: {i[3]}\nCountry: {str(i[4])}\nDate Of Birth: {str(i[5])}\nGendre: {str(i[6])}')
                     window.destroy()
                     break
         else:
@@ -200,6 +200,7 @@ def database():
                 (firstname, lastname, email, password, state, gendr, d, m, y,))
             conn.commit()
             conn.close()
+
 
 ent_fn = StringVar()
 ent_ln = StringVar()

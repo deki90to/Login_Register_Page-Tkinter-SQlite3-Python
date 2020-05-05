@@ -1,1 +1,7 @@
-('some', 'one', 'someone@gmail.com', '123456', 'Serbia', 'Male', '24', 'March', '1987')
+First Name: some
+Last Name: one
+E-mail: someone@gmail.com
+Password: 123456
+Country: Serbia
+Date Of Birth: Male
+Gendre: 24

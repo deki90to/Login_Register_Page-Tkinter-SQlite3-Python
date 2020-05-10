@@ -67,8 +67,10 @@ def third_window():
 
     label_rc = Label(window2, text = ' Enter email   ►', bg = '#004038', fg = 'white', relief = 'raised', width = 12, font = ('arial', 12, 'italic'))
     label_rc.place(x = 10, y = 30)
+
     entry_rec = Entry(window2, bd = 4, relief = 'sunken', font = ('arial', 9, 'italic'), textvar = ent_rec)
     entry_rec.place(x = 140, y = 30)
+    
     button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 15, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
     button_rec.place(x = 150, y = 70)
 
@@ -102,7 +104,7 @@ def second_window():
             if e_mail == i[2] and password == i[3]:
                 tkinter.messagebox.showinfo("Success", "Login successfull, check 'result.txt' file")
                 with open('result.txt','w') as file:
-                    file.write(f'First Name: {str(i[0])}\nLast Name: {str(i[1])}\nE-mail: {str(i[2])}\nPassword: {i[3]}\nCountry: {str(i[4])}\nDate Of Birth: {str(i[5])}\nGendre: {str(i[6])}')
+                    file.write(f'First Name: {str(i[0])}\nLast Name: {str(i[1])}\nE-mail: {str(i[2])}\nPassword: {i[3]}\nCountry: {str(i[4])}\nDate Of Birth: {str(i[5])}\nGender: {str(i[6])}')
                     window.destroy()
                     break
         else:
@@ -112,7 +114,7 @@ def second_window():
                 tkinter.messagebox.showwarning("Failed", "Wrong email or password")
 
 
-    label_w2 = Label(window, text= ' Login ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', font = ('Times', 25, 'italic'))
+    label_w2 = Label(window, text= ' Login ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', border = 0, font = ('Times', 25, 'italic'))
     label_w2.place(x = 50, y = 80)
     label_w3 = Label(window, text = ' Email         ►', bg = '#004038', fg = 'white', relief = 'raised', width = 10, font = ('arial', 11, 'italic'))
     label_w3.place(x = 30, y = 202)
@@ -194,9 +196,9 @@ def database():
                 break
         else:
             cur.execute('CREATE TABLE IF NOT EXISTS user \
-                (firstName TEXT, lastName TEXT, mail TEXT, password TEXT, state TEXT, gendre TEXT, day TEXT, month TEXT, year TEXT)')
+                    (FirstName TEXT, LastName TEXT, Email TEXT, Password TEXT, State TEXT, Gender TEXT, Day TEXT, Month TEXT, Year TEXT)')
             cur.execute('INSERT INTO user \
-                (firstName, lastName, mail, password, state, gendre, day, month, year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',\
+                (FirstName, LastName, Email, Password, State, Gender, Day, Month, Year) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',\
                 (firstname, lastname, email, password, state, gendr, d, m, y,))
             conn.commit()
             conn.close()
@@ -214,7 +216,7 @@ var2 = StringVar()
 var3 = StringVar()
 
 
-label = Label(root, text = ' Register ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', font = ('Times', 30, 'italic'))
+label = Label(root, text = ' Register ', bg = '#004038', fg = 'white', width = 9, relief = 'ridge', border = 0, font = ('Times', 30, 'italic'))
 label.place(x = 50, y = 80)
 label2 = Label(root, text = ' First name    ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label2.place(x = 80, y = 200)
@@ -230,7 +232,7 @@ label5 = Label(root, text = ' Country        ►', bg = '#004038', fg = 'white',
 label5.place(x = 80, y = 325)
 b_d = Label(root, text = ' Date of birth ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 b_d.place(x = 80, y = 360)
-label7 = Label(root, text = ' Gendre          ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
+label7 = Label(root, text = ' Gender          ►', bg = '#004038', fg = 'white', width = 12, relief = 'raised', font = ('arial', 12, 'italic'))
 label7.place(x = 80, y = 400)
 
 

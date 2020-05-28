@@ -5,13 +5,31 @@ from PIL import Image, ImageTk
 import time
 import calendar
 import datetime
+import os
+# import playsound
+# import speech_recognition as sr 
+# from gtts import gTTS 
+# from pygame import mixer
+
+
+# def speak(text):
+
+    # tts = gTTS(text=text, lang='en')
+    # filename = ('voice.mp3')
+    # tts.save(filename)
+    # playsound.playsound(filename, True)
+
+    # tts = gTTS(text=text, lang='en')
+    # tts.save('voice.mp3')
+    # mixer.init()
+    # mixer.music.load('voice.mp3')
+    # mixer.music.play()
 
 
 def Clock():
     current_time = time.strftime("%H:%M:%S")
     clock.config(text = current_time, font=('arial',20,'italic'))
     clock.after(100, Clock)
-
 
 def exitApp():
     opt_ex = tkinter.messagebox.askquestion('Exit application', 'Are you sure?')
@@ -73,6 +91,7 @@ def third_window():
     
     button_rec = Button(window2, text = 'Send', bg = 'red', fg = 'white', width = 15, relief = 'raised', font = ('arial', 10, 'bold'), command = recover)
     button_rec.place(x = 150, y = 70)
+    button_rec.bind("<Return>", (lambda event: recover()))
 
     window2.mainloop()
 
@@ -104,7 +123,8 @@ def second_window():
             if e_mail == i[2] and password == i[3]:
                 tkinter.messagebox.showinfo("Success", "Login successfull, check 'result.txt' file")
                 with open('result.txt','w') as file:
-                    file.write(f'First Name: {str(i[0])}\nLast Name: {str(i[1])}\nE-mail: {str(i[2])}\nPassword: {i[3]}\nCountry: {str(i[4])}\nDate Of Birth: {str(i[5])}\nGender: {str(i[6])}')
+                    file.write(f'First Name: {str(i[0])}\nLast Name: {str(i[1])}\nE-mail: {str(i[2])}\nPassword: {i[3]}\
+                        \nCountry: {str(i[4])}\nDate Of Birth: {str(i[5])}\nGender: {str(i[6])}')
                     window.destroy()
                     break
         else:
@@ -130,10 +150,13 @@ def second_window():
 
     btn_login = Button(window, text = 'Login', bg = 'red', fg = 'white', width = 8, font = ('bold',10, 'bold'), command = login)
     btn_login.place(x = 140, y = 305)
+    btn_login.bind("<Return>", (lambda event: login()))
     btn_cancel = Button(window, text = 'Cancel', bg = 'red', fg = 'white', width = 8, font = ('bold',10, 'bold'), command = window.destroy)
     btn_cancel.place(x = 214, y = 305)
+    btn_cancel.bind("<Return>", (lambda event: window.destroy()))
     btn_rec = Button(window, text = "Can't remember password", bg = 'dark red', fg = 'white', relief = 'raised', font = ('arial', 8, 'bold'), command = third_window)
     btn_rec.place(x = 250 , y = 375)
+    btn_rec.bind("<Return>", (lambda event: third_window()))
 
     window.mainloop()
 
@@ -158,6 +181,7 @@ submenu2 = Menu(menu)
 menu.add_cascade(label = 'Options', menu = submenu2)
 submenu2.add_command(label = 'About', command = about)
 
+
 def database():
     firstname = ent_fn.get()
     lastname = ent_ln.get()
@@ -171,12 +195,14 @@ def database():
     y = var3.get()
 
 
-    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0 \
+    if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0 or len(password2) == 0 \
      or len(state) == 0 or len(gendr) == 0 or len(d) == 0 or len(m) == 0 or len(y) == 0:
         tkinter.messagebox.showwarning('Failed', 'Please fill up all required fields')
+        # speak('fill up all fields')
+        count += 1
 
-    elif '@' not in email or '.' not in email:
-        tkinter.messagebox.showwarning('Failed', 'Email not entered correctly')
+    elif '@' not in email or '.' not in email or len('@') > 1:
+        tkinter.messagebox.showwarning('Failed', 'Email not correct')
 
     elif password2 != password:
         tkinter.messagebox.showwarning('Failed', 'Passwords not match')
@@ -282,15 +308,18 @@ rbtn2.place(x = 295, y = 400)
 
 login_button = Button(root, text = 'Login', bg = 'red', fg = 'white', width = 23, relief ='raised', font = ('arial', 11, 'bold'), command = second_window)
 login_button.place(x = 210, y = 520)
+login_button.bind("<Return>", (lambda event: second_window()))
 register_button = Button(root, text = 'Register', bg = 'red', fg = 'white', width = 10, font = ('arial', 12, 'bold'), command = database)
 register_button.place(x = 210, y = 470)
+register_button.bind("<Return>", (lambda event: database()))
 quit_button = Button(root, text = 'Quit', bg = 'red', fg = 'white', width = 10, font = ('arial', 12, 'bold'), command = exitApp)
 quit_button.place(x = 320, y = 470)
+quit_button.bind("<Return>", (lambda event: exitApp()))
 
 
 clock = Label(root, bg = '#004038', fg = 'white', relief = 'raised', font = ('arial', 20, 'bold'))
 clock.place(x = 450, y = 20)
-date = Label(root, text=f"{datetime.datetime.now():%a, %b %d %Y}", fg="white", bg="#004038", relief = 'raised', font=("arial", 10, 'bold'))
+date = Label(root, text=f"{datetime.datetime.now():%a, %b %d %Y}", fg="white", bg="#004038", relief = 'raised', font=("arial", 9, 'bold'))
 date.place(x = 450, y = 60)
 
 

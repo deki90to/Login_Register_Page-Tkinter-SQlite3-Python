@@ -12,19 +12,6 @@ import os
 # from pygame import mixer
 
 
-# def speak(text):
-
-    # tts = gTTS(text=text, lang='en')
-    # filename = ('voice.mp3')
-    # tts.save(filename)
-    # playsound.playsound(filename, True)
-
-    # tts = gTTS(text=text, lang='en')
-    # tts.save('voice.mp3')
-    # mixer.init()
-    # mixer.music.load('voice.mp3')
-    # mixer.music.play()
-
 
 def Clock():
     current_time = time.strftime("%H:%M:%S")
@@ -40,6 +27,7 @@ def about():
     tkinter.messagebox.showinfo("About page", "This is a registration page")
 
 
+
 # TRECI PROZOR
 
 def third_window():
@@ -49,6 +37,11 @@ def third_window():
     photo = PhotoImage(file = 'wallpaper2.png')
     label = Label(window2, image = photo)
     label.pack()
+
+    def exitThWin():
+        opt_th_win = tkinter.messagebox.askquestion('Exit Login', 'Are you sure?')
+        if opt_th_win == 'yes':
+            window2.destroy()
 
     ent_rec = StringVar()
 
@@ -93,7 +86,10 @@ def third_window():
     button_rec.place(x = 150, y = 70)
     button_rec.bind("<Return>", (lambda event: recover()))
 
+
+    window2.bind("<Escape>", (lambda event: exitThWin()))
     window2.mainloop()
+
 
 
 # DRUGI PROZOR
@@ -105,6 +101,11 @@ def second_window():
     photo = PhotoImage(file = 'wallpaper2.png')
     label = Label(window, image = photo)
     label.pack()
+
+    def exitSecWin():
+        opt_sec_win = tkinter.messagebox.askquestion('Exit Login', 'Are you sure?')
+        if opt_sec_win == 'yes':
+            window.destroy()
 
     ent_lg_em = StringVar()
     ent_lg_pass = StringVar()
@@ -158,6 +159,7 @@ def second_window():
     btn_rec.place(x = 250 , y = 375)
     btn_rec.bind("<Return>", (lambda event: third_window()))
 
+    window.bind("<Escape>", (lambda event: exitSecWin()))
     window.mainloop()
 
 
@@ -198,8 +200,6 @@ def database():
     if len(firstname) == 0 or len(lastname) == 0 or len(email) == 0 or len(password) == 0 or len(password2) == 0 \
      or len(state) == 0 or len(gendr) == 0 or len(d) == 0 or len(m) == 0 or len(y) == 0:
         tkinter.messagebox.showwarning('Failed', 'Please fill up all required fields')
-        # speak('fill up all fields')
-        count += 1
 
     elif '@' not in email or '.' not in email or len('@') > 1:
         tkinter.messagebox.showwarning('Failed', 'Email not correct')
@@ -326,4 +326,5 @@ date.place(x = 450, y = 60)
 
 if __name__ == '__main__':
     Clock()
+    root.bind("<Escape>", (lambda event: exitApp()))
     root.mainloop()
